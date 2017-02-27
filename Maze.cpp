@@ -1,7 +1,7 @@
 #include "Maze.h"
 #include "Color.h"
 #include "Rect.h"
-
+#include "iostream"
 #include <windows.h>  //for the sleep function
 
 #include <iostream>
@@ -131,20 +131,25 @@ void Maze::processSolution(StackLinked<Cell>* stack)
 
 bool Maze::traverse()
 {
+	
    //DO THIS
    //complete several sections in this method
 
    bool done = false; //assume we are not done unless proven otherwise
    StackLinked<Cell> stack;
+   
 
    maze->setElement(1, 1, TRIED);
+   
    gui->update();
 
    Cell* start_cell = new Cell(1, 1);
+  cout<<"I got here"<<endl;
    stack.push(start_cell);  //start from the top left corner
-
+    
    while(!stack.isEmpty())
    {
+	   
       Cell* top_cell = processBackTrack(&stack);
       if (top_cell == NULL) break;  //no solution (back tracked all the way to the beginning)
 
@@ -165,9 +170,12 @@ bool Maze::traverse()
       //check that the current maze location corresponds to SPACE, otherwise delete it
       if (val==SPACE)
       {
+		 
          //update the maze location to TRIED
          //put the cell on the stack (move forward through the maze)
 		maze->setElement(row,col,TRIED);
+	
+		
 		stack.push(curr_cell);
 
 

@@ -1,6 +1,6 @@
 #if !defined (STACKLINKED_H)
 #define STACKLINKED_H
-
+#include "iostream"
 #include "NextNode.h"
 
 template < class T >
@@ -82,10 +82,13 @@ template < class T >
 void StackLinked<T>::push(T* item)
 {
    //DO THIS
-   NextNode<T>* NewItem;
+   NextNode<T>* NewItem= new NextNode<T>(item);
+  // std::cout<<"I got here in push"<<std::endl;
    NewItem->setNext(top);
-   
-
+   top=NewItem;
+  //std::cout<<"I got here in push"<<std::endl;
+  sze++;
+   std::cout<<"I got here in push"<<std::endl;
 
 
 }
@@ -99,6 +102,7 @@ T* StackLinked<T>::pop()
     T* item = NULL;
 	item=top->getItem();
 	top=top->getNext();
+	sze--;
    return item;
 
 
